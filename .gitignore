@@ -1,0 +1,19 @@
+# IBM-licensed binaries — NEVER commit (public repo; see mockkit/libs/README.md)
+mockkit/libs/**
+!mockkit/libs/README.md
+
+# Secrets / local environment
+.env
+.env.*
+
+# Real capture output (contains instance-specific metadata); only the
+# clearly-labelled synthetic samples are committed.
+dictionaries/**
+!dictionaries/_synthetic/
+!dictionaries/_synthetic/**
+
+# Build output
+mockkit/**/target/
+node_modules/
+__pycache__/
+*.class

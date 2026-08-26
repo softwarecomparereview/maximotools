@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  # Offline tests, run once per version lens: a lens-divergent expectation
+  # executes in its lens's job and skips loudly in the other — a divergence
+  # between release lines is a visible red/skip, never a silent pass.
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        lens: ["9.1", "9.2"]
+    name: lens ${{ matrix.lens }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Capture pipeline tests (offline)
+        run: node --test capture/test/
+
+      - name: Stub server tests (offline)
+        run: node --test stub/test/
+
+      - name: Stub fail-closed demo (409 for an unevidenced lens)
+        run: |
+          node stub/server.mjs --port 8009 --lens ${{ matrix.lens }} --allow-synthetic &
+          sleep 1
+          status=$(curl -s -o /tmp/body.json -w '%{http_code}' \
+            -H 'x-version-lens: 7.6.1' http://localhost:8009/api/os/mxapiasset)
+          cat /tmp/body.json
+          test "$status" = "409"
+          grep -q NO_FIXTURE_FOR_VERSION /tmp/body.json
+          kill %1
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: mockkit core (no IBM JARs present)
+        working-directory: mockkit
+        run: mvn -q -B -pl core -Dmaximo.lens=${{ matrix.lens }} verify
