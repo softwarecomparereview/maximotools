@@ -1,0 +1,26 @@
+{
+  "provenance": {
+    "kind": "SYNTHETIC_PLACEHOLDER",
+    "note": "Starter fixture so the stub runs before any real capture. Not evidence of any IBM Maximo/MAS response shape. Replace with a captured response and set kind=CAPTURED with source host/date/build."
+  },
+  "versions": [
+    "9.1",
+    "9.2"
+  ],
+  "request": {
+    "method": "GET",
+    "path": "/api/os/mxapiwo"
+  },
+  "response": {
+    "status": 429,
+    "headers": {
+      "retry-after": "5"
+    },
+    "body": {
+      "Error": {
+        "message": "SYNTHETIC: too many requests",
+        "reasonCode": "RATE_LIMITED"
+      }
+    }
+  }
+}

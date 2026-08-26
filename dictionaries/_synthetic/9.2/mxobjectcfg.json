@@ -1,0 +1,79 @@
+{
+  "_provenance": {
+    "kind": "SYNTHETIC_PLACEHOLDER",
+    "sourceHost": "synthetic.invalid",
+    "captureDate": "2026-08-26T00:00:00.000Z",
+    "buildString": "SYNTHETIC-9.2",
+    "sha256": "synthetic \u2014 not a capture; replace with real output of capture/capture.mjs"
+  },
+  "payload": {
+    "member": [
+      {
+        "objectname": "ASSET",
+        "attributes": [
+          {
+            "attributename": "ASSETNUM",
+            "maxtype": "UPPER",
+            "length": 25,
+            "required": true
+          },
+          {
+            "attributename": "DESCRIPTION",
+            "maxtype": "ALN",
+            "length": 100,
+            "required": false
+          },
+          {
+            "attributename": "STATUS",
+            "maxtype": "UPPER",
+            "length": 20,
+            "required": true,
+            "domainid": "ASSETSTATUS"
+          },
+          {
+            "attributename": "SITEID",
+            "maxtype": "UPPER",
+            "length": 8,
+            "required": true
+          },
+          {
+            "attributename": "ASSETTYPE",
+            "maxtype": "UPPER",
+            "length": 16,
+            "required": false
+          }
+        ]
+      },
+      {
+        "objectname": "WORKORDER",
+        "attributes": [
+          {
+            "attributename": "WONUM",
+            "maxtype": "UPPER",
+            "length": 10,
+            "required": true
+          },
+          {
+            "attributename": "DESCRIPTION",
+            "maxtype": "ALN",
+            "length": 100,
+            "required": false
+          },
+          {
+            "attributename": "STATUS",
+            "maxtype": "UPPER",
+            "length": 16,
+            "required": true,
+            "domainid": "WOSTATUS"
+          },
+          {
+            "attributename": "WOPRIORITY",
+            "maxtype": "INTEGER",
+            "length": 2,
+            "required": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>au.com.assetize.maximotools</groupId>
+  <artifactId>mockkit-parent</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Maximo Mockito MBO kit (parent)</name>
+  <description>
+    Version-aware Mockito mocks for Maximo business objects. The core module
+    is IBM-free and always builds; the profile modules compile IBM-typed
+    adapters and are activated only when the corresponding IBM Manage JARs
+    have been extracted into mockkit/libs/&lt;lens&gt;/ (never committed).
+  </description>
+
+  <modules>
+    <module>core</module>
+  </modules>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.10.2</junit.version>
+    <mockito.version>5.12.0</mockito.version>
+    <jackson.version>2.17.2</jackson.version>
+    <!-- Version lens the test JVM runs under; override with -Dmaximo.lens=9.2 -->
+    <maximo.lens>9.1</maximo.lens>
+  </properties>
+
+  <profiles>
+    <!--
+      Profile modules activate on the presence of the extracted IBM JAR, so a
+      plain `mvn verify` (or `mvn -pl core verify`) with an empty libs/ never
+      tries to compile IBM-typed code. See libs/README.md for extraction.
+    -->
+    <profile>
+      <id>mas91</id>
+      <activation>
+        <file><exists>${basedir}/libs/9.1/businessobjects.jar</exists></file>
+      </activation>
+      <modules>
+        <module>profile-mas91</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>mas92</id>
+      <activation>
+        <file><exists>${basedir}/libs/9.2/businessobjects.jar</exists></file>
+      </activation>
+      <modules>
+        <module>profile-mas92</module>
+      </modules>
+    </profile>
+  </profiles>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.2.5</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

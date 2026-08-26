@@ -1,0 +1,19 @@
+{
+  "_provenance": {
+    "kind": "SYNTHETIC_PLACEHOLDER",
+    "sourceHost": "synthetic.invalid",
+    "captureDate": "2026-08-26T00:00:00.000Z",
+    "buildString": "SYNTHETIC-9.2",
+    "sha256": "synthetic — not a capture; replace with real output of capture/capture.mjs"
+  },
+  "payload": {
+    "type": "object",
+    "properties": {
+      "wonum": { "type": "string" },
+      "description": { "type": "string" },
+      "status": { "type": "string" },
+      "wopriority": { "type": "integer" }
+    },
+    "required": ["wonum"]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "_provenance": {
+    "kind": "SYNTHETIC_PLACEHOLDER",
+    "sourceHost": "synthetic.invalid",
+    "captureDate": "2026-08-26T00:00:00.000Z",
+    "buildString": "SYNTHETIC-9.2",
+    "sha256": "synthetic — kit extension, not emitted by capture/capture.mjs yet"
+  },
+  "payload": {
+    "ASSETSTATUS": ["NOT READY", "OPERATING", "DECOMMISSIONED"],
+    "WOSTATUS": ["WAPPR", "APPR", "INPRG", "COMP", "CLOSE"]
+  }
+}
